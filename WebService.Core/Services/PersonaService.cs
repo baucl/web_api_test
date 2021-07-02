@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +19,11 @@ namespace WebService.Core.Services
             _personaRepository = personaRepository;
         }
 
-        public async Task<List<Persona>> GetPersonasService() 
+        public List<Persona> GetPersonasService() 
         {
             try
             {
-                return await _personaRepository.GetPersonasRepository();
+                return _personaRepository.GetPersonasRepository();
             }
             catch (Exception ex)
             {
@@ -44,6 +46,13 @@ namespace WebService.Core.Services
         {
             try
             {
+                JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    TypeNameHandling = TypeNameHandling.Objects,
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                };
+
 
                 return _personaRepository.CreatePersonaRepository(new Persona
                 {
@@ -116,11 +125,11 @@ namespace WebService.Core.Services
             }
         }
 
-        public async Task<bool> DeletePersonaService(Guid id) 
+        public bool DeletePersonaService(Guid id) 
         {
             try
             {
-                return await _personaRepository.DeletePersonaRepository(id);
+                return _personaRepository.DeletePersonaRepository(id);
             }
             catch (Exception ex)
             {

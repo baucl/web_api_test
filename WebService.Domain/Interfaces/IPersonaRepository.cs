@@ -8,11 +8,11 @@ namespace WebService.Domain.Interfaces
 {
     public interface IPersonaRepository
     {
-        public Task<List<Persona>> GetPersonasRepository();
+        public List<Persona> GetPersonasRepository();
         public Persona GetPersonByIdRepository(Guid id);
         public Persona CreatePersonaRepository(Persona persona);
         public Persona UpdatePersonaRepository(Persona persona);
-        public Task<bool> DeletePersonaRepository(Guid id);
+        public bool DeletePersonaRepository(Guid id);
 
     }
 }

@@ -8,10 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using WebService.API.Helpers;
 using WebService.API.Model;
@@ -30,12 +31,15 @@ namespace WebService.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           
+
             services.AddServices();
+
             services.AddControllers();
-            services.AddMvc().AddJsonOptions(o =>
+
+            services.AddControllers().AddNewtonsoftJson(o =>
             {
-                o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-                o.JsonSerializerOptions.MaxDepth = 0;
+                o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
             services.AddSwaggerGen(c =>

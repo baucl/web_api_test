@@ -21,9 +21,9 @@ namespace WebService.API.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<Persona>>> Index()
+        public ActionResult<List<Persona>> Index()
         {
-            return Ok(await _personaService.GetPersonasService());
+            return Ok(_personaService.GetPersonasService());
         }
 
         [HttpGet("GetPersonaById/{id}")]
@@ -45,16 +45,16 @@ namespace WebService.API.Controllers
            
         }
 
-        [HttpPut]
+        [HttpPut("UpdatePersona")]
         public  ActionResult<Persona> UpdatePersona([FromBody]Persona persona)
         {
             return Ok(_personaService.UpdatePersonaService(persona));
         }
 
-        [HttpDelete("id")]
-        public async Task<ActionResult<Persona>> UpdatePersona(string id)
+        [HttpDelete("DeletePersona/{id}")]
+        public ActionResult<Persona> DeletePersona(string id)
         {
-            return Ok(await _personaService.DeletePersonaService(Guid.Parse(id)));
+            return Ok(_personaService.DeletePersonaService(Guid.Parse(id)));
         }
     }
 }

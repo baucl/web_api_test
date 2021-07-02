@@ -17,11 +17,11 @@ namespace WebService.Infrastructure.DataAccess
             _context = context;
         }
 
-        public async Task<List<Persona>> GetPersonasRepository() 
+        public List<Persona> GetPersonasRepository() 
         {
             try
             {
-                return await _context.Personas.ToListAsync();
+                return _context.Personas.ToList();
             }
             catch (Exception ex)
             {
@@ -83,6 +83,8 @@ namespace WebService.Infrastructure.DataAccess
                         Telefono = persona.Telefono,
                         SexoCodigo = persona.SexoCodigo
                     };
+                    _context.Attach(dataPersona);
+                    _context.Update(dataPersona);
                     _context.SaveChanges();
                 }
 
@@ -94,14 +96,15 @@ namespace WebService.Infrastructure.DataAccess
             }
         }
 
-        public async Task<bool> DeletePersonaRepository(Guid id) 
+        public bool DeletePersonaRepository(Guid id) 
         {
             try
             {
-                var dataPersona = await _context.Personas.SingleOrDefaultAsync(o => o.Id == id);
+                var dataPersona = _context.Personas.SingleOrDefault(o => o.Id == id);
                 if (dataPersona != null)
                 {
-                     _context.Entry(dataPersona).State = (Microsoft.EntityFrameworkCore.EntityState)EntityState.Deleted;
+                     _context.Attach(dataPersona);
+                     _context.Remove(dataPersona);
                      _context.SaveChanges();
                     return true;
                 }
