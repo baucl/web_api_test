@@ -33,7 +33,7 @@ namespace WebService.API.Controllers
         }
 
         [HttpPost("CreatePersona")]
-        public ActionResult<Persona> CreatePersona([FromBody]PersonaDto persona)
+        public ActionResult<Persona> CreatePersona(PersonaDto persona)
         {
             if (ModelState.IsValid)
             {

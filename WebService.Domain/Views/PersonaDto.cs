@@ -24,7 +24,7 @@ namespace WebService.Domain.Views
         public short sexo_code { get; set; }
         public string sexo_name { get; set; }
         [Required(ErrorMessage = "campo fecha_nacimiento es requerido")]
-        public DateTime? fecha_nacimiento { get; set; }
+        public string fecha_nacimiento { get; set; }
         [Required(ErrorMessage = "campo region es requerido")]
         public short region_code { get; set; }
         public string region_name { get; set; }

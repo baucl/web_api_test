@@ -63,7 +63,7 @@ namespace WebService.Core.Services
                     ApellidoMaterno = personaDto.apellido_materno,
                     ApellidoPaterno = personaDto.apellido_paterno,
                     Email = personaDto.email,
-                    FechaNacimiento = personaDto.fecha_nacimiento,
+                    FechaNacimiento = Convert.ToDateTime(personaDto.fecha_nacimiento),
                     SexoCodigo = personaDto.sexo_code,
                     RegionCodigo = personaDto.region_code,
                     CiudadCodigo = personaDto.cuidad_code,
